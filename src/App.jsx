@@ -1,5 +1,5 @@
 import { getDatabase, set, ref, push, onValue } from "firebase/database";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [fireData, setFireData] = useState("");
@@ -8,17 +8,23 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault()
     
+    
     console.log(fireData);
     
       set(push(ref(db, "fire/")), {
         agun: fireData,
       });
-    
-      setFireData("")
-    
-    
-    
   };
+
+  useEffect(() => {
+    onValue(ref(db, "fire/"), (snapshot) => {
+      snapshot.forEach((jinis) => {
+        console.log(jinis.val(), jinis.key); 
+        
+      })
+    });
+  }, [])
+
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-amber-700 overflow-hidden">
       <form className="flex items-center gap-5">
