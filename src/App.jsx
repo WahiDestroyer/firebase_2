@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 function App() {
   const [fireData, setFireData] = useState("");
+  const [fireList, setFireList] = useState([]);
   const db = getDatabase();
 
   const handleSubmit = (e) => {
@@ -17,13 +18,16 @@ function App() {
   };
 
   useEffect(() => {
-    onValue(ref(db, "fire/"), (snapshot) => {
-      snapshot.forEach((jinis) => {
-        console.log(jinis.val(), jinis.key); 
-        
+    onValue(ref(db, "fire/"), (mal) => {
+      mal.forEach((jinis) => {
+        // console.log(jinis.val()); 
+        setFireList(jinis.val())
       })
     });
   }, [])
+
+  console.log(fireList);
+  
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-amber-700 overflow-hidden">
