@@ -18,6 +18,7 @@ function App() {
   };
 
   useEffect(() => {
+    let malpati = []
     onValue(ref(db, "fire/"), (mal) => {
       mal.forEach((jinis) => {
         // console.log(jinis.val()); 
