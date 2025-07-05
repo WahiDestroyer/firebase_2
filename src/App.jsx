@@ -7,34 +7,30 @@ function App() {
   const db = getDatabase();
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    
-    
-    console.log(fireData);
-    
-      set(push(ref(db, "fire/")), {
-        agun: fireData,
-      });
+    e.preventDefault();
+    set(push(ref(db, "fire/")), {
+      agun: fireData,
+    });
+    setFireData("");
   };
 
   useEffect(() => {
-    let malpati = []
     onValue(ref(db, "fire/"), (mal) => {
+      let malpati = [];
       mal.forEach((jinis) => {
-        // console.log(jinis.val()); 
-        setFireList(jinis.val())
-      })
+        setFireList(jinis.val());
+        malpati.push({...jinis.val(), id: jinis.key});
+      });
+      setFireList(malpati);
     });
-  }, [])
-
-  console.log(fireList);
-  
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-amber-700 overflow-hidden">
       <form className="flex items-center gap-5">
         <input
           type="text"
+          value={fireData}
           onChange={(e) => setFireData(e.target.value)}
           className="border-2 rounded-2xl bg-amber-500 outline-0 px-2 font-bold"
         />
@@ -46,9 +42,11 @@ function App() {
           add
         </button>
       </form>
-      <ul className="font-bold text-2xl text-blue-800 capitalize pt-5">
-        <li>hello</li>
-      </ul>
+      <ol className="font-bold text-2xl text-green-600 capitalize pt-5 h-55 overflow-y-auto no-scrollbar">
+        {fireList.map((jinis) => (
+          <li key={jinis.id}>{jinis.agun}</li>
+        ))}
+      </ol>
     </div>
   );
 }
