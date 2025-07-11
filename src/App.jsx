@@ -43,8 +43,11 @@ function App() {
         </button>
       </form>
       <ol className="font-bold text-2xl text-green-600 capitalize pt-5 h-55 overflow-y-auto no-scrollbar">
-        {fireList.map((jinis) => (
-          <li key={jinis.id}>{jinis.agun}</li>
+        {fireList.map((jinis, i) => (
+          <li key={jinis.id}>
+            <span>{i+1}. </span>
+            <span>{jinis.agun}</span>
+          </li>
         ))}
       </ol>
     </div>
