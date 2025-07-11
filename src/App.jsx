@@ -1,5 +1,8 @@
 import { getDatabase, set, ref, push, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
+import { CiEdit } from "react-icons/ci"
+import { FaAngry } from "react-icons/fa"
+import { MdDeleteForever } from "react-icons/md"
 
 function App() {
   const [fireData, setFireData] = useState("");
@@ -8,6 +11,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!fireData) return alert("kisu lekhak beda 😤" )
     set(push(ref(db, "fire/")), {
       agun: fireData,
     });
@@ -42,11 +46,17 @@ function App() {
           add
         </button>
       </form>
-      <ol className="font-bold text-2xl text-green-600 capitalize pt-5 h-55 overflow-y-auto no-scrollbar">
+      <ol className="flex flex-col gap-2 font-bold text-2xl text-green-600 capitalize pt-5 h-55 overflow-y-auto no-scrollbar">
         {fireList.map((jinis, i) => (
-          <li key={jinis.id}>
-            <span>{i+1}. </span>
+          <li key={jinis.id} className="flex gap-2">
+            <span>{i + 1}. </span>
             <span>{jinis.agun}</span>
+            <button className="text-blue-900">
+              <CiEdit />
+            </button>
+            <button className="text-red-700">
+              <MdDeleteForever />
+            </button>
           </li>
         ))}
       </ol>
