@@ -1,7 +1,6 @@
-import { getDatabase, set, ref, push, onValue, update } from "firebase/database";
+import { getDatabase, set, ref, push, onValue, update, remove } from "firebase/database";
 import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
-import { FaAngry } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 
 function App() {
@@ -23,6 +22,11 @@ function App() {
     });
     setFireData("");
   };
+
+  const handelDelete = (e) => {
+    remove(ref(db, "fire/" + e));
+    
+  }
 
   const handleUpdate = () => {
     update(ref(db, "fire/" + editedData.id), {
@@ -48,18 +52,23 @@ function App() {
   }, []);
 
   return (
+    
     <div className="flex flex-col items-center justify-center h-screen bg-amber-700 overflow-hidden">
       <form className="flex items-center gap-5">
         <input
           type="text"
           value={fireEdit ? editedData.agun : fireData}
-          onChange={(e) =>
-            fireEdit
+          onChange={
+            (e) =>
+              fireEdit
+                
               ? setEditedData((agardata) => ({
-                  ...agardata,
+                ...agardata,
+                
                   agun: e.target.value,
-                }))
-              : (e) => setFireData(e.target.value)
+              }))
+                
+              : setFireData(e.target.value)
           }
           className="border-2 rounded-2xl bg-amber-500 outline-0 px-2 font-bold"
         />
@@ -101,7 +110,7 @@ function App() {
             >
               <CiEdit />
             </button>
-            <button className="text-red-700">
+            <button onClick={(e)=>handelDelete(jinis.id)} className="text-red-700">
               <MdDeleteForever />
             </button>
           </li>
