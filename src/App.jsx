@@ -73,7 +73,7 @@ function App() {
           className="border-2 rounded-2xl bg-amber-500 outline-0 px-2 font-bold"
         />
         {fireEdit ? (
-          <>
+          <div className="flex flex-col items-center">
             <button
               onClick={handleUpdate}
               className="capitalize text-lg font-bold bg-pink-700 p-1
@@ -88,7 +88,7 @@ function App() {
             >
               Cancel
             </button>
-          </>
+          <div/>
         ) : (
           <button
             className="capitalize text-lg font-bold bg-green-500 p-1
