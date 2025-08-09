@@ -99,7 +99,7 @@ function App() {
           </button>
         )}
       </form>
-      <ol className="flex flex-col gap-2 font-bold text-2xl text-pink-600 capitalize pt-5 h-55 overflow-y-auto no-scrollbar">
+      <ol className="flex flex-col gap-2 font-bold text-2xl text-green-800 capitalize pt-5 h-55 overflow-y-auto no-scrollbar">
         {fireList.map((jinis, i) => (
           <li key={jinis.id} className="flex gap-2">
             <span>{i + 1}. </span>
